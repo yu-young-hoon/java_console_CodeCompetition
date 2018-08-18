@@ -8,34 +8,33 @@ public class BinarySearchTree {
 	}
 	public Node root;
 	
-	public BinarySearchTree () {
-		
-	}
-	
 	public void insertData(int data) {
-		Node node = new Node();
-		node.data = data;
-		
 		if(root == null) {
+			Node node = new Node();
+			node.data = data;
 			root = node;
 			return;
 		}
-		
-		Node findEndNode = root;
-		while(true) {
-			if(findEndNode.data >= node.data) {
-				if(findEndNode.left == null) {
-					findEndNode.left = node;
-					break;
-				}
-				findEndNode = findEndNode.left;
-			} else {
-				if(findEndNode.right == null) {
-					findEndNode.right = node;
-					break;
-				}
-				findEndNode = findEndNode.right;
+		insertNode(root, data);
+	}
+	
+	private void insertNode(Node parent, int data) {
+		if(parent.data >= data) {
+			if(parent.left == null) {
+				Node node = new Node();
+				node.data = data;
+				parent.left = node;
+				return;
 			}
+			insertNode(parent.left, data);
+		} else {
+			if(parent.right == null) {
+				Node node = new Node();
+				node.data = data;
+				parent.right = node;
+				return;
+			}
+			insertNode(parent.right, data);
 		}
 	}
 	
@@ -64,7 +63,7 @@ public class BinarySearchTree {
 				if(findNodeParent.right.data == data) { // 찾음
 					Node succedingNode = findSuccedingNode(findNodeParent.right);
 					if(succedingNode != null)
-
+						succedingNode.left = findNodeParent.right.left;
 					findNodeParent.right = succedingNode;
 					break;
 				}
