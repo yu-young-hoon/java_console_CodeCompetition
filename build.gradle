@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+ext {
+    lombokVersions = "1.16.10"
+}
+
+group 'com.yyh'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'junit:junit:4.12'
+    compileOnly("org.projectlombok:lombok:${lombokVersions}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersions}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersions}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersions}")
+}
